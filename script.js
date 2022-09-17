@@ -36,9 +36,10 @@ function addToPage(myLibrary) {
     pages.id = 'pages';
     read.id = 'read';
     x.classList.add("x");
+    let count=0;
     for(let i=0;i<myLibrary.length;i++){
-    div.dataset.number = i;
-    x.dataset.number = i;
+    div.dataset.number = count;
+    x.dataset.number = count;
     x.onclick = function () {remove()};
     x.innerHTML = 'X';
 
@@ -53,6 +54,7 @@ function addToPage(myLibrary) {
     div.appendChild(author);
     div.appendChild(pages);
     div.appendChild(read);
+    count++;
     }
 
 }
