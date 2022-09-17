@@ -11,6 +11,11 @@ function Book (name,author,read,pages,x) {
 }
 }
 
+const a = new Book('steve', 'X',2,3)
+
+
+addBookToLibrary(a);
+
 
 function addBookToLibrary(books) {
   myLibrary.push(books);
@@ -34,7 +39,9 @@ function addToPage(myLibrary) {
     for(let i=0;i<myLibrary.length;i++){
     div.dataset.number = i;
     x.dataset.number = i;
+    x.onclick = function () {remove()};
     x.innerHTML = 'X';
+
     name.innerHTML = myLibrary[i].name;
     author.innerHTML = myLibrary[i].author;
     pages.innerHTML = myLibrary[i].pages;
@@ -64,7 +71,7 @@ document.getElementById("submit").addEventListener("click", function(evt){
     let author = document.getElementById("author");
     let pages = document.getElementById("pages");
     let read = document.getElementById("read");
-    let x = document.getElementById("x");
+    let x = document.getElementsByClassName("x");
     const book = new Book (names.value,author.value,pages.value,read.value);
     addBookToLibrary(book);
     names.value = '';
@@ -74,13 +81,28 @@ document.getElementById("submit").addEventListener("click", function(evt){
     document.getElementById("myForm").style.display = "none";
    });
 
-   let x = document.querySelectorAll(".x");
-   if(x)
-   {
-    let x = document.querySelectorAll(".x");
-    x.addEventListener("click",function(){
-        console.log("yalla")
-    })
-   }
+const listOfInput = document.querySelectorAll('.x');
+
+ function remove(index){
+  myLibrary.splice(index, 1)
+  console.log("s");
+  
+ }
 
 
+
+const updateTable = () => {
+  this.textContent = '';
+
+  myLibrary.forEach((book, index) => {
+    let $row = document.createElement('tr');
+    Object.keys(book).forEach(prop => {
+      let $newTd = document.createElement('td');
+      $newTd.textContent = book[prop];
+      if (prop == 'read') $newTd.textContent = book[prop] ? 'Read' : 'Not read';
+      $row.appendChild($newTd);
+    }); 
+  });
+
+
+}
