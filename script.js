@@ -19,8 +19,8 @@ const a = new Book('steve', 'X',2,3)
 addBookToLibrary(a);
 
 
-function addBookToLibrary(bookss) {
-  myLibrary.push(bookss);
+function addBookToLibrary(books) {
+  myLibrary.push(books);
   addToPage(myLibrary);
 }
 
@@ -29,7 +29,7 @@ function hideLeft(){
 }
 function addToPage(myLibrary) {
     let div = document.createElement("div");
-    let name = document.createElement("div");
+    let name= document.createElement("div");
     let author = document.createElement("div");
     let pages = document.createElement("div");
     let read = document.createElement("div");
@@ -49,7 +49,7 @@ function addToPage(myLibrary) {
     name.innerHTML = myLibrary[i].name;
     author.innerHTML = myLibrary[i].author;
     pages.innerHTML = myLibrary[i].pages;
-    read.innerHTML = myLibrary[i].pages;
+    read.innerHTML = myLibrary[i].read;
     left.appendChild(div);
     div.appendChild(x);
     div.appendChild(read);
@@ -72,34 +72,25 @@ function openForm() {
 document.getElementById("submit").addEventListener("click", function(evt){
     evt.preventDefault();
     let names = document.getElementById("names");
-    let author = document.getElementById("author");
-    let pages = document.getElementById("pages");
-    let read = document.getElementById("read");
+    let authors = document.getElementById("authors");
+    let pagess = document.getElementById("pagess");
+    let reads = document.getElementById("reads");
     let x = document.getElementsByClassName("x");
-    const book = new Book (names.value,author.value,pages.value,read.value);
+    const book = new Book (names.value,authors.value,pagess.value,reads.value);
     addBookToLibrary(book);
     names.value = '';
-    author.value = '';
-    pages.value= '';
-    read.value= '';
+    authors.value = '';
+    pagess.value= '';
+    reads.value= '';
     document.getElementById("myForm").style.display = "none";
    });
 
-const listOfInput = document.querySelectorAll('.x');
 
  function remove(index){
  
   myLibrary.splice(index, 1)
   let a= index.target.getAttribute('data-number');
-  console.log(a);
-const eli = document.getElementById( a);
+  const eli = document.getElementById( a);
   eli.remove();
 
  }
-
- function updateTablee(a)
- {
-  addToPage(myLibrary[0])
-
- }
-
