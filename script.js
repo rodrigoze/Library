@@ -1,3 +1,5 @@
+let left = document.getElementById("left");
+
 let myLibrary = [];
 
 function Book (name,author,read,pages,x) {
@@ -17,13 +19,15 @@ const a = new Book('steve', 'X',2,3)
 addBookToLibrary(a);
 
 
-function addBookToLibrary(books) {
-  myLibrary.push(books);
+function addBookToLibrary(bookss) {
+  myLibrary.push(bookss);
   addToPage(myLibrary);
 }
 
+function hideLeft(){
+  left.textContent='';
+}
 function addToPage(myLibrary) {
-    let left = document.getElementById("left");
     let div = document.createElement("div");
     let name = document.createElement("div");
     let author = document.createElement("div");
@@ -40,9 +44,8 @@ function addToPage(myLibrary) {
     for(let i=0;i<myLibrary.length;i++){
     div.dataset.number = count;
     x.dataset.number = count;
-    x.onclick = function () {remove()};
+    x.addEventListener("click", remove);
     x.innerHTML = 'X';
-
     name.innerHTML = myLibrary[i].name;
     author.innerHTML = myLibrary[i].author;
     pages.innerHTML = myLibrary[i].pages;
@@ -56,8 +59,7 @@ function addToPage(myLibrary) {
     div.appendChild(read);
     count++;
     }
-
-}
+  }
 
 function openForm() {
     document.getElementById("myForm").style.display = "block";
@@ -86,25 +88,18 @@ document.getElementById("submit").addEventListener("click", function(evt){
 const listOfInput = document.querySelectorAll('.x');
 
  function remove(index){
+ 
   myLibrary.splice(index, 1)
-  console.log("s");
-  
+  let a= index.target.getAttribute('data-number');
+  console.log(a);
+const el1 = document.querySelector(`[data-number=$a]`);
+  eli.textContent='';  
+
  }
 
+ function updateTablee(a)
+ {
+  addToPage(myLibrary[0])
 
+ }
 
-const updateTable = () => {
-  this.textContent = '';
-
-  myLibrary.forEach((book, index) => {
-    let $row = document.createElement('tr');
-    Object.keys(book).forEach(prop => {
-      let $newTd = document.createElement('td');
-      $newTd.textContent = book[prop];
-      if (prop == 'read') $newTd.textContent = book[prop] ? 'Read' : 'Not read';
-      $row.appendChild($newTd);
-    }); 
-  });
-
-
-}
