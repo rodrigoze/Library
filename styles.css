@@ -33,7 +33,7 @@
 #right{
     grid-column: 4/5;
 }
-#card{
+.card{
     display:flex;
     flex-basis:33%;
     justify-content: center;

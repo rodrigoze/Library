@@ -35,14 +35,14 @@ function addToPage(myLibrary) {
     let read = document.createElement("div");
     let x = document.createElement("button");
     name.id = 'name';
-    div.id = 'card';
+    div.classList.add('card');
     author.id = 'author';
     pages.id = 'pages';
     read.id = 'read';
     x.classList.add("x");
     let count=0;
     for(let i=0;i<myLibrary.length;i++){
-    div.dataset.number = count;
+    div.id = count;
     x.dataset.number = count;
     x.addEventListener("click", remove);
     x.innerHTML = 'X';
@@ -92,8 +92,8 @@ const listOfInput = document.querySelectorAll('.x');
   myLibrary.splice(index, 1)
   let a= index.target.getAttribute('data-number');
   console.log(a);
-const el1 = document.querySelector(`[data-number=$a]`);
-  eli.textContent='';  
+const eli = document.getElementById( a);
+  eli.remove();
 
  }
 
