@@ -2,18 +2,17 @@ let left = document.getElementById("left");
 
 let myLibrary = [];
 
-function Book (name,author,read,pages,x) {
+function Book (name,author,read,pages,toggle,x) {
     this.name = name
     this.author= author
     this.read = read
     this.pages = pages
     this.x = 'X'
-    this.info = function() {
-      return `The book ${this.name} written by ${this.author} and have ${this.pages} pages. You read ${this.read} pages`
-}
+    this.toggle=toggle
+ 
 }
 
-const a = new Book('steve', 'X',2,3)
+const a = new Book('steve', 'X',2,3,true)
 
 
 addBookToLibrary(a);
@@ -34,22 +33,27 @@ function addToPage(myLibrary) {
     let pages = document.createElement("div");
     let read = document.createElement("div");
     let x = document.createElement("button");
+    let t = document.createElement("INPUT");
+    t.setAttribute("type", "checkbox");
     name.id = 'name';
     div.classList.add('card');
     author.id = 'author';
     pages.id = 'pages';
     read.id = 'read';
+    t.id='checko';
     x.classList.add("x");
     let count=0;
     for(let i=0;i<myLibrary.length;i++){
     div.id = count;
     x.dataset.number = count;
+    t.dataset.number = count;
     x.addEventListener("click", remove);
+    t.addEventListener("change",chango)
     x.innerHTML = 'X';
     name.innerHTML = myLibrary[i].name;
     author.innerHTML = myLibrary[i].author;
     pages.innerHTML = myLibrary[i].pages;
-    read.innerHTML = myLibrary[i].read;
+    read.innerHTML = myLibrary[i].read;    
     left.appendChild(div);
     div.appendChild(x);
     div.appendChild(read);
@@ -57,6 +61,11 @@ function addToPage(myLibrary) {
     div.appendChild(author);
     div.appendChild(pages);
     div.appendChild(read);
+    div.appendChild(t);
+    if(myLibrary[i].toggle === true)
+    t.checked = true;
+    else
+    t.checked=false;
     count++;
     }
   }
@@ -76,21 +85,34 @@ document.getElementById("submit").addEventListener("click", function(evt){
     let pagess = document.getElementById("pagess");
     let reads = document.getElementById("reads");
     let x = document.getElementsByClassName("x");
-    const book = new Book (names.value,authors.value,pagess.value,reads.value);
+    let b= document.getElementById("check").checked;
+    const book = new Book (names.value,authors.value,pagess.value,reads.value,b);
     addBookToLibrary(book);
     names.value = '';
     authors.value = '';
     pagess.value= '';
     reads.value= '';
+    document.getElementById("check").checked = false;
     document.getElementById("myForm").style.display = "none";
    });
 
 
  function remove(index){
- 
+
   myLibrary.splice(index, 1)
   let a= index.target.getAttribute('data-number');
-  const eli = document.getElementById( a);
+  const eli = document.getElementById(a);
   eli.remove();
 
  }
+
+ function chango(indexo){
+  let b= indexo.target.getAttribute('data-number');
+  let elis = document.getElementById(b).firstChild.nextSibling.innerHTML;
+  const index = myLibrary.map(object => object.name).indexOf(elis);
+  if(indexo.target.checked===true)
+  myLibrary[index].toggle=true;
+  else
+  myLibrary[index].toggle=false;
+}
+ 
