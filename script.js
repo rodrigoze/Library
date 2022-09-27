@@ -2,14 +2,19 @@ let left = document.getElementById("left");
 
 let myLibrary = [];
 
-function Book (name,author,read,pages,toggle,x) {
-    this.name = name
-    this.author= author
-    this.read = read
-    this.pages = pages
-    this.x = 'X'
-    this.toggle=toggle
- 
+class Book {
+
+  constructor(name,author,read,pages,toggle,x) {
+    this.name = name;
+    this.author= author;
+    this.read = read;
+    this.pages = pages;
+    this.x = 'X';
+    this.toggle=toggle;
+  }
+
+
+
 }
 
 const a = new Book('steve', 'X',2,3,true)
